@@ -10,13 +10,64 @@ if (!process.env.BASE_URL) {
   throw new Error('No base url specified!');
 }
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl  = process.env.BASE_URL;
+const eventUri = process.env.EVENT_URI;
+
+
 
 app.get('/**', (req, res) => {
-  request({ uri: `${baseUrl}${req.url}` }, function(error, response, body) {
-    const regex = new RegExp(baseUrl, 'g');
+  // req.url -> the request part from the address bar
+  let uriParts = req.url.split('/');
+  let languageStr = '';
+  let languagePart = '';
+  let requestStr = '';
 
-    body = body.replace(regex, '');
+  uriParts = uriParts.filter((item) => {
+    return item !== '';
+  });
+
+  if (uriParts[0] == 'en')
+  {
+    // Build and replace urls with locale
+    languageStr = uriParts[0];
+    languagePart = `/${uriParts[0]}`;
+    
+    uriParts.map((part) => {
+      if (part != 'en')
+      {
+        requestStr += `/${part}`;
+      }
+    });
+  }
+  else
+  {
+    // Build and replace basic urls
+    requestStr = req.url;
+  }
+
+  request({ uri: `${baseUrl}${languagePart}${eventUri}${requestStr}` }, function(error, response, body) {
+    let foo = `${baseUrl}${languagePart}${eventUri}${requestStr}`;
+    
+    // Replace language switch url
+    if (languageStr == 'en')
+    {
+      const languageSwitchRewriteRegex = new RegExp(baseUrl + eventUri, 'g');
+      body = body.replace(languageSwitchRewriteRegex, '');
+    }
+    else {
+      const languageSwitchRewriteRegex = new RegExp(baseUrl + '/en' + eventUri, 'g');
+      body = body.replace(languageSwitchRewriteRegex, '/en');
+    }
+    
+    // Replace links and remove visibility classes
+    const linkRewriteRegex = new RegExp(baseUrl + languagePart + eventUri, 'g');
+    body = body.replace(linkRewriteRegex, languagePart);
+    
+    // Replace visibility classes
+    const pageVisibilityRegex = new RegExp('visible-only-outside', 'g');
+    body = body.replace(pageVisibilityRegex, '');
+
+    // Output
     res.send(body);
   });
 });
