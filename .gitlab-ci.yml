@@ -14,7 +14,7 @@ stages:
 deploy to server:
   stage: deploy
   script:
-    - ssh fehovateszt@134.209.235.252 "cd files && git pull origin master && npm install && rm .env && cp .env.fehovateszt.hungexpo.hu .env && exit"
+    - ssh fehovateszt@134.209.235.252 "cd /sites/fehovateszt.hungexpo.hu/files && git pull origin master && npm install && rm .env && cp .env.fehovateszt.hungexpo.hu .env && exit"
   only:
     - master
 
