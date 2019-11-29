@@ -1,0 +1,26 @@
+before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  - "which ssh-agent || ( apt-get install -qq openssh-client )"
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+stages:
+  - deploy
+  - restart
+
+deploy to server:
+  stage: deploy
+  script:
+    - ssh fehovateszt@134.209.235.252 "cd files && git pull origin master && npm install && rm .env && cp .env.fehovateszt.hungexpo.hu .env && exit"
+  only:
+    - master
+
+restart processes:
+  stage: restart
+  script:
+    - ssh andre@134.209.235.252 "pm2 restart all && exit"
+  only:
+    - master
