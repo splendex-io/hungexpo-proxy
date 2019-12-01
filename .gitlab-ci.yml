@@ -14,7 +14,24 @@ stages:
 deploy to server:
   stage: deploy
   script:
-    - ssh fehovateszt@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.fehovateszt.hungexpo.hu .env && exit"
+    - ssh agromashexpo@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.agromashexpo.hu .env && exit"
+    - ssh automotivexpo@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.automotivexpo.hu .env && exit"
+    - ssh autotechnika@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.autotechnika.hungexpo.hu .env && exit"
+    - ssh beautyandstyle@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.beautyandstyle.hu .env && exit"
+    - ssh boatshow@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.boatshow.hu  .env && exit"
+    - ssh construma@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.construma.hu .env && exit"
+    - ssh fehova@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.fehova.hu .env && exit"
+    - ssh hungaromed@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.hungaromed.hu .env && exit"
+    - ssh hungarotherm@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.hungarotherm.hu .env && exit"
+    - ssh iparnapjai@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.iparnapjai.hu .env && exit"
+    - ssh motorfesztival@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.motorfesztival.hu .env && exit"
+    - ssh osz@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.osz.otthon-design.hu .env && exit"
+    - ssh otthon-design@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.otthon-design.hu .env && exit"
+    - ssh reneo@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.reneo.hu .env && exit"
+    - ssh sirha-budapest@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.sirha-budapest.com .env && exit"
+    - ssh utazas@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.utazas.hungexpo.hu .env && exit"
+    - ssh events@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.events.hungexpo.hu .env && exit"
+    - ssh rental@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.rental.hungexpo.hu .env && exit"
   only:
     - master
 
