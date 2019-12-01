@@ -18,7 +18,7 @@ deploy to server:
     - ssh automotivexpo@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.automotivexpo.hu .env && exit"
     - ssh autotechnika@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.autotechnika.hungexpo.hu .env && exit"
     - ssh beautyandstyle@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.beautyandstyle.hu .env && exit"
-    - ssh boatshow@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.boatshow.hu  .env && exit"
+    - ssh boatshow@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.boatshow.hu .env && exit"
     - ssh construma@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.construma.hu .env && exit"
     - ssh fehova@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.fehova.hu .env && exit"
     - ssh hungaromed@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.hungaromed.hu .env && exit"
