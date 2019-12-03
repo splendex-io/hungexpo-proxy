@@ -9,7 +9,6 @@ before_script:
 
 stages:
   - deploy
-  - restart
 
 deploy to server:
   stage: deploy
@@ -32,12 +31,5 @@ deploy to server:
     - ssh utazas@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.utazas.hungexpo.hu .env && exit"
     - ssh events@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.events.hungexpo.hu .env && exit"
     - ssh rental@134.209.235.252 "cd files && git pull origin master && npm install && rm .env -f && cp .env.rental.hungexpo.hu .env && exit"
-  only:
-    - master
-
-restart processes:
-  stage: restart
-  script:
-    - ssh andre@134.209.235.252 "pm2 restart all && exit"
   only:
     - master
