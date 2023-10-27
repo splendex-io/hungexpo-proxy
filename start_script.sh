@@ -16,4 +16,5 @@ ssh andre@134.209.235.252 'cd /sites/sirha-budapest.com/files && PORT=3015 pm2 s
 ssh andre@134.209.235.252 'cd /sites/utazas.hungexpo.hu/files && PORT=3016 pm2 start server.js --env production --name utazas -c "0 0 * * *" --max-memory-restart 50M --watch && exit' &&
 ssh andre@134.209.235.252 'cd /sites/karavanszalon.hu/files && PORT=3017 pm2 start server.js --env production --name karavanszalon -c "0 0 * * *" --max-memory-restart 50M --watch && exit' &&
 ssh andre@134.209.235.252 'cd /sites/events.hungexpo.hu/files && PORT=3101 pm2 start server.js --env production --name events -c "0 0 * * *" --max-memory-restart 50M --watch && exit' &&
-ssh andre@134.209.235.252 'cd /sites/rental.hungexpo.hu/files && PORT=3102 pm2 start server.js --env production --name rental -c "0 0 * * *" --max-memory-restart 50M --watch && exit'
+ssh andre@134.209.235.252 'cd /sites/rental.hungexpo.hu/files && PORT=3102 pm2 start server.js --env production --name rental -c "0 0 * * *" --max-memory-restart 50M --watch && exit' &&
+ssh andre@134.209.235.252 'cd /sites/environtec.hu/files && PORT=3018 pm2 start server.js --env production --name environtec -c "0 0 * * *" --max-memory-restart 50M --watch && exit' 
