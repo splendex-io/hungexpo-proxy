@@ -56,6 +56,7 @@ app.get('/**', (req, res) => {
     }
     else {
       const languageSwitchRewriteRegex = new RegExp(baseUrl + '/en' + eventUri, 'g');
+      console.log(body);
       body = body.replace(languageSwitchRewriteRegex, '/en');
     }
     
