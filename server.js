@@ -32,6 +32,7 @@ app.get('/**', (req, res) => {
   request({ 
   uri: fullUri,
   rejectUnauthorized: false  // This allows untrusted certificates
+  timeout: 10000  // Timeout in milliseconds, e.g., 10000 for 10 seconds
   }, function (error, response, body) {
     if (error) {
       console.error(`Error during request to ${fullUri}:`, error);
