@@ -29,7 +29,10 @@ app.get('/**', (req, res) => {
 
   const fullUri = `${baseUrl}${languagePart}${eventUri}${requestStr}`;
 
-  request({ uri: fullUri }, function (error, response, body) {
+  request({ 
+  uri: fullUri,
+  rejectUnauthorized: false  // This allows untrusted certificates
+  }, function (error, response, body) {
     if (error) {
       console.error(`Error during request to ${fullUri}:`, error);
       return res.status(500).send('Internal Server Error');
