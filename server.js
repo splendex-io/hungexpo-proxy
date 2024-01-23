@@ -48,7 +48,7 @@ app.get('/**', (req, res) => {
   request({ uri: `${baseUrl}${languagePart}${eventUri}${requestStr}` }, function(error, response, body) {
     let foo = `${baseUrl}${languagePart}${eventUri}${requestStr}`;
 
-    consoloe.log(foo);
+    console.log(foo);
     
     // Replace language switch url
     if (languageStr == 'en')
