@@ -1,6 +1,8 @@
 const express = require('express');
 const request = require('request');
+const Sentry = require("@sentry/node");
 const app = express();
+Sentry.init({ dsn: "https://73f5b7971134073201d2ec2610381947@o4505521270751232.ingest.sentry.io/4506672831987712", environment: process.env.EVENT_URI });
 const port = process.env.PORT || 3002;
 
 const dotenv = require('dotenv');
@@ -22,7 +24,7 @@ app.get('/**', (req, res) => {
   if (uriParts[0] === 'en') {
     languageStr = uriParts[0];
     languagePart = `/${uriParts[0]}`;
-    requestStr = uriParts.slice(1).join('/');
+    requestStr = `/${uriParts.slice(1).join("/")}`;
   } else {
     requestStr = req.url;
   }
@@ -34,11 +36,13 @@ app.get('/**', (req, res) => {
   rejectUnauthorized: false // Adds vulnerability to man-in-the-middle attacks
 }, function (error, response, body) {
     if (error) {
+      Sentry.captureMessage(`Error during request to ${fullUri}`);
       console.error(`Error during request to ${fullUri}:`, error);
       return res.status(500).send('Internal Server Error');
     }
 
     if (!response || response.statusCode !== 200) {
+      Sentry.captureMessage(`Non-200 response from ${fullUri}: ${response && response.statusCode}`);
       console.log(`Non-200 response from ${fullUri}:`, response && response.statusCode);
       return res.status(response ? response.statusCode : 500).send('Error');
     }
@@ -62,6 +66,7 @@ app.get('/**', (req, res) => {
 
       res.send(body);
     } catch (err) {
+      Sentry.captureMessage(`Error processing response body from ${fullUri}`);
       console.error('Error processing response body:', err);
       res.status(500).send('Internal Server Error');
     }
